@@ -21,5 +21,17 @@ namespace DoAnWebBanDoChoi.Controllers
             var users = await _context.Users.ToListAsync();
             return Ok(users);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound("User không tồn tại");
+            }
+
+            return Ok(user);
+        }
     }
 }
